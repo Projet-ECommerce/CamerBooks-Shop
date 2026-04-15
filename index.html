@@ -7,19 +7,61 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header>
-        <h1>CamerBooks</h1>
-        <div id="cart-status">Panier : <span id="total-price">0</span> FCFA</div>
+        <nav class="navbar">
+            <div class="logo">CamerBooks 📚</div>
+            <div id="cart-counter">Panier : <span id="total-price">0</span> FCFA</div>
+        </nav>
     </header>
 
-    <main class="book-grid">
-        <div class="book-card">
-            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200" alt="Livre">
-            <h3>Algo L1</h3>
-            <p>5000 FCFA</p>
-            <button class="add-btn" data-price="5000">Ajouter</button>
+    <section class="hero">
+        <h2>Trouvez vos livres de cours en un clic</h2>
+        <p>La première plateforme de revente de livres entre étudiants.</p>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">Nos Livres Disponibles</h2>
+        
+        <div class="book-grid">
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=300" alt="Livre Algo">
+                </div>
+                <div class="book-info">
+                    <h3>Algorithmique L1</h3>
+                    <p class="price">5 000 FCFA</p>
+                    <button class="add-btn" data-price="5000">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1543004629-1420f544ae83?w=300" alt="Livre Python">
+                </div>
+                <div class="book-info">
+                    <h3>Programmation Python</h3>
+                    <p class="price">7 500 FCFA</p>
+                    <button class="add-btn" data-price="7500">Ajouter au panier</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=300" alt="Livre Enfant Noir">
+                </div>
+                <div class="book-info">
+                    <h3>L'Enfant Noir</h3>
+                    <p class="price">3 000 FCFA</p>
+                    <button class="add-btn" data-price="3000">Ajouter au panier</button>
+                </div>
+            </div>
         </div>
-        </main>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 CamerBooks - Projet Académique L1</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
