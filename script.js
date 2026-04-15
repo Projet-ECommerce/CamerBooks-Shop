@@ -2,14 +2,14 @@
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const books = [
-    { id: 1, title: "Le Petit Prince", author: "Antoine de Saint-Exupéry", price: 12.99, image: "https://picsum.photos/id/1015/300/400", category: "litterature" },
-    { id: 2, title: "1984", author: "George Orwell", price: 9.99, image: "https://picsum.photos/id/201/300/400", category: "sf" },
-    { id: 3, title: "Harry Potter à l'école des sorciers", author: "J.K. Rowling", price: 15.50, image: "https://picsum.photos/id/870/300/400", category: "fantasy" },
-    { id: 4, title: "L'Étranger", author: "Albert Camus", price: 8.50, image: "https://picsum.photos/id/1005/300/400", category: "litterature" },
-    { id: 5, title: "Le monde s'effondre", author: "Chinua Achebe", price: 11.99, image: "https://picsum.photos/id/133/300/400", category: "africaine" },
-    { id: 6, title: "Dune", author: "Frank Herbert", price: 14.99, image: "https://picsum.photos/id/160/300/400", category: "sf" },
-    { id: 7, title: "Le Seigneur des Anneaux", author: "J.R.R. Tolkien", price: 18.50, image: "https://picsum.photos/id/201/300/400", category: "fantasy" },
-    { id: 8, title: "Une si longue lettre", author: "Mariama Bâ", price: 7.99, image: "https://picsum.photos/id/1005/300/400", category: "africaine" }
+    { id: 1, title: "Sur le Bord du Monde", author: "Antoine de Saint-Exupéry", price: 12.99, image: "https://picsum.photos/id/1015/300/400", category: "litterature" },
+    { id: 2, title: "Regard d’Acier", author: "George Orwell", price: 9.99, image: "https://picsum.photos/id/201/300/400", category: "sf" },
+    { id: 3, title: "Le Signal", author: "J.K. Rowling", price: 15.50, image: "https://picsum.photos/id/870/300/400", category: "fantasy" },
+    { id: 4, title: "Dos au Large", author: "Albert Camus", price: 8.50, image: "https://picsum.photos/id/1005/300/400", category: "litterature" },
+    { id: 5, title: "Garage Jaune", author: "Chinua Achebe", price: 11.99, image: "https://picsum.photos/id/133/300/400", category: "africaine" },
+    { id: 6, title: "Écran Brumeux", author: "Frank Herbert", price: 14.99, image: "https://picsum.photos/id/160/300/400", category: "sf" },
+    { id: 7, title: "Les grand piques", author: "J.R.R. Tolkien", price: 18.50, image: "https://picsum.photos/seed/picsum/200/300", category: "fantasy" },
+    { id: 8, title: "Un fidel ami", author: "Mariama Bâ", price: 7.99, image: "https://picsum.photos/id/237/200/300", category: "africaine" }
 ];
 
 const categories = [
@@ -39,7 +39,7 @@ function displayBooks(filteredBooks) {
                 <h3 class="font-medium text-lg">${book.title}</h3>
                 <p class="text-slate-500 text-sm">${book.author}</p>
                 <div class="flex justify-between items-end mt-4">
-                    <p class="text-2xl font-bold text-emerald-600">${book.price.toFixed(2)} €</p>
+                    <p class="text-2xl font-bold text-emerald-600">${book.price.toFixed(2)} Fcfa</p>
                     <button onclick="addToCart(${book.id})" class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">Ajouter au panier</button>
                 </div>
             </div>
@@ -104,10 +104,10 @@ function showCart() {
                 <div class="flex-1">
                     <p class="font-medium">${item.title}</p>
                     <p class="text-sm text-slate-500">${item.author}</p>
-                    <p class="text-sm">${item.quantity || 1} × ${item.price.toFixed(2)} €</p>
+                    <p class="text-sm">${item.quantity || 1} × ${item.price.toFixed(2)} Fcfa</p>
                 </div>
                 <div class="text-right">
-                    <p class="font-bold">${itemTotal.toFixed(2)} €</p>
+                    <p class="font-bold">${itemTotal.toFixed(2)} Fcfa</p>
                     <button onclick="removeFromCart(${index});" class="text-red-500 text-xs mt-2 hover:underline">Supprimer</button>
                 </div>
             `;
@@ -115,7 +115,7 @@ function showCart() {
         });
     }
 
-    totalEl.textContent = `${total.toFixed(2)} €`;
+    totalEl.textContent = `${total.toFixed(2)} Fcfa`;
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 }
