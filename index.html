@@ -48,7 +48,7 @@
                     🛒 <span id="cart-count" class="text-xs bg-white text-emerald-800 rounded-full px-2 py-0.5">0</span>
                 </button>
                 
-                <button onclick="alert('Fonction de connexion à venir !')" 
+                <button id="login-button"
                         class="flex items-center gap-2 bg-white text-emerald-800 hover:bg-emerald-100 px-6 py-2 rounded-xl font-medium transition">
                     👤 Se connecter
                 </button>
@@ -63,41 +63,38 @@
                 <h1 class="text-6xl font-serif leading-none mb-4">Découvrez l’univers<br>des livres camerounais & internationaux</h1>
                 <p class="text-2xl mb-8 text-emerald-100">Plus de 500 titres • Livraison rapide • Projet collaboratif sur GitHub</p>
                 <div class="flex gap-4">
-                    <a href="#boutique" 
-                       class="bg-white text-emerald-800 px-10 py-4 rounded-2xl font-medium text-xl hover:scale-105 transition">Explorer la boutique</a>
-                    <a href="#featured-books" 
-                       class="border-2 border-white px-10 py-4 rounded-2xl font-medium text-xl hover:bg-white hover:text-emerald-800 transition">Voir les nouveautés</a>
+                    <a href="#boutique" class="bg-white text-emerald-800 px-10 py-4 rounded-2xl font-medium text-xl hover:scale-105 transition">Explorer la boutique</a>
+                    <a href="#featured-books" class="border-2 border-white px-10 py-4 rounded-2xl font-medium text-xl hover:bg-white hover:text-emerald-800 transition">Voir les nouveautés</a>
                 </div>
             </div>
             <div class="hidden md:block text-center">
-                <img src="https://picsum.photos/id/1015/600/500" alt="Livre hero" 
-                     class="rounded-2xl shadow-2xl max-h-[420px] mx-auto">
+                <img src="https://picsum.photos/id/1015/600/500" alt="Livre hero" class="rounded-2xl shadow-2xl max-h-[420px] mx-auto">
             </div>
         </div>
     </header>
 
-    <!-- LIVRES EN VEDETTE / BOUTIQUE -->
+    <!-- BOUTIQUE -->
     <section id="boutique" class="max-w-7xl mx-auto px-6 py-16">
-        <h2 id="featured-books" class="text-4xl font-serif mb-8 flex items-center gap-3">
-            🔥 Livres en vedette
-        </h2>
+        <div class="flex flex-wrap items-center justify-between mb-8">
+            <h2 id="featured-books" class="text-4xl font-serif">🔥 Livres en vedette</h2>
+            
+            <!-- Filtres catégories -->
+            <div id="category-filters" class="flex flex-wrap gap-2">
+                <!-- Les boutons seront générés par JS -->
+            </div>
+        </div>
         
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="books-container">
-            <!-- Les livres seront générés par JavaScript -->
+            <!-- Livres générés par JS -->
         </div>
     </section>
 
-    <!-- CATÉGORIES -->
+    <!-- CATÉGORIES (section statique en bas) -->
     <section class="bg-slate-100 py-16">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl font-serif mb-8">Explorez par catégorie</h2>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">📖 Littérature africaine</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🧙 Fantasy</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🔬 Science-fiction</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">📚 Romans policiers</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🌍 Voyage & Aventure</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🧠 Développement personnel</div>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4" id="static-categories">
+                <!-- Sera rempli par JS pour la cohérence -->
             </div>
         </div>
     </section>
@@ -115,7 +112,7 @@
                 <a href="https://github.com/Projet-ECommerce/CamerBooks-Shop/pulls" target="_blank" class="hover:text-emerald-400">Pull Requests</a>
             </div>
             <div class="text-sm text-slate-400">
-                © 2026 CamerBooks Shop • Branche JS en cours de développement
+                © 2026 CamerBooks Shop • Branche JavaScript active
             </div>
         </div>
     </footer>
@@ -125,14 +122,13 @@
         <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-6">
             <h3 class="text-2xl font-medium mb-4">Votre panier</h3>
             <div id="cart-items" class="max-h-96 overflow-auto"></div>
-            <div class="border-t pt-4 mt-4 flex justify-between font-bold">
+            <div class="border-t pt-4 mt-4 flex justify-between font-bold text-lg">
                 <span>Total :</span>
                 <span id="cart-total">0 €</span>
             </div>
             <div class="flex gap-3 mt-6">
-                <button onclick="closeCart()" class="flex-1 py-3 border border-slate-300 rounded-2xl">Fermer</button>
-                <button onclick="alert('Passer à la caisse - fonctionnalité à venir !')" 
-                        class="flex-1 py-3 bg-emerald-600 text-white rounded-2xl">Passer à la caisse</button>
+                <button onclick="closeCart()" class="flex-1 py-3 border border-slate-300 rounded-2xl text-slate-700">Fermer</button>
+                <button onclick="checkout()" class="flex-1 py-3 bg-emerald-600 text-white rounded-2xl">Passer à la caisse</button>
             </div>
         </div>
     </div>
