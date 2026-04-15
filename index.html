@@ -3,66 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CamerBooks | Librairie Étudiante</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="LivreGit - Votre librairie en ligne collaborative sur GitHub">
+    <title>LivreGit - Vente de livres en ligne</title>
+    
+    <!-- Tailwind CSS CDN (temporaire pour une jolie interface immédiate) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuration Tailwind pour un thème librairie élégant
+        document.addEventListener('DOMContentLoaded', () => {
+            tailwind.config = {
+                content: ["./**/*.{html,js}"],
+                theme: {
+                    extend: {
+                        fontFamily: { serif: ['Georgia', 'serif'] }
+                    }
+                }
+            }
+        })
+    </script>
+    
+    <link rel="stylesheet" href="style.css"> <!-- Sera rempli par Tracy plus tard -->
 </head>
-<body>
+<body class="bg-slate-50 text-slate-800 font-sans">
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">CamerBooks 📚</div>
-            <div id="cart-counter">Panier : <span id="total-price">0</span> FCFA</div>
-        </nav>
-    </header>
-
-    <section class="hero">
-        <h2>Trouvez vos livres de cours en un clic</h2>
-        <p>La première plateforme de revente de livres entre étudiants.</p>
-    </section>
-
-    <main class="container">
-        <h2 class="section-title">Nos Livres Disponibles</h2>
-        
-        <div class="book-grid">
-            <div class="book-card">
-                <div class="book-image">
-                    <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=300" alt="Livre Algo">
-                </div>
-                <div class="book-info">
-                    <h3>Algorithmique L1</h3>
-                    <p class="price">5 000 FCFA</p>
-                    <button class="add-btn" data-price="5000">Ajouter au panier</button>
-                </div>
+    <!-- NAVBAR -->
+    <nav class="bg-emerald-800 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 text-3xl font-bold">
+                📖 <span class="font-serif">LivreGit</span>
             </div>
 
-            <div class="book-card">
-                <div class="book-image">
-                    <img src="https://images.unsplash.com/photo-1543004629-1420f544ae83?w=300" alt="Livre Python">
-                </div>
-                <div class="book-info">
-                    <h3>Programmation Python</h3>
-                    <p class="price">7 500 FCFA</p>
-                    <button class="add-btn" data-price="7500">Ajouter au panier</button>
-                </div>
+            <!-- Menu -->
+            <div class="hidden md:flex items-center gap-8 text-lg">
+                <a href="#" class="hover:text-emerald-200 transition">Accueil</a>
+                <a href="#" class="hover:text-emerald-200 transition">Boutique</a>
+                <a href="#" class="hover:text-emerald-200 transition">Catégories</a>
+                <a href="#" class="hover:text-emerald-200 transition">À propos</a>
+                <a href="#" class="hover:text-emerald-200 transition">Contact</a>
             </div>
 
-            <div class="book-card">
-                <div class="book-image">
-                    <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=300" alt="Livre Enfant Noir">
+            <!-- Recherche + Panier + Compte -->
+            <div class="flex items-center gap-4">
+                <div class="relative">
+                    <input id="search-input" 
+                           type="text" 
+                           placeholder="Rechercher un livre..." 
+                           class="bg-white text-slate-800 px-4 py-2 rounded-full w-72 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm">
+                    <button onclick="alert('Recherche bientôt active avec JS !')" 
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-600">
+                        🔎
+                    </button>
                 </div>
-                <div class="book-info">
-                    <h3>L'Enfant Noir</h3>
-                    <p class="price">3 000 FCFA</p>
-                    <button class="add-btn" data-price="3000">Ajouter au panier</button>
+                
+                <button onclick="alert('Panier bientôt géré par le JS !')" 
+                        class="flex items-center gap-2 hover:bg-emerald-700 px-4 py-2 rounded-xl transition">
+                    🛒 <span id="cart-count" class="text-xs bg-white text-emerald-800 rounded-full px-2 py-0.5">0</span>
+                </button>
+                
+                <button onclick="alert('Connexion bientôt avec JS !')" 
+                        class="flex items-center gap-2 bg-white text-emerald-800 hover:bg-emerald-100 px-6 py-2 rounded-xl font-medium transition">
+                    👤 Se connecter
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="bg-gradient-to-r from-emerald-700 to-teal-600 text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="text-6xl font-serif leading-none mb-4">Découvrez l’univers<br>des livres sur GitHub</h1>
+                <p class="text-2xl mb-8 text-emerald-100">Plus de 500 titres • Livraison gratuite dès 30 € • Collaboration open-source</p>
+                <div class="flex gap-4">
+                    <a href="#" onclick="alert('Boutique bientôt active !')" 
+                       class="bg-white text-emerald-800 px-10 py-4 rounded-2xl font-medium text-xl hover:scale-105 transition">Explorer la boutique</a>
+                    <a href="#" class="border-2 border-white px-10 py-4 rounded-2xl font-medium text-xl hover:bg-white hover:text-emerald-800 transition">Voir les nouveautés</a>
+                </div>
+            </div>
+            <div class="hidden md:block text-center">
+                <div class="inline-block bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/30">
+                    <img src="https://picsum.photos/id/1015/600/500" alt="Livre hero" 
+                         class="rounded-2xl shadow-2xl max-h-[420px] mx-auto">
                 </div>
             </div>
         </div>
-    </main>
+    </header>
 
-    <footer>
-        <p>&copy; 2024 CamerBooks - Projet Académique L1</p>
+    <!-- LIVRES EN VEDETTE -->
+    <section class="max-w-7xl mx-auto px-6 py-16">
+        <h2 class="text-4xl font-serif mb-8 flex items-center gap-3">
+            🔥 Livres en vedette
+        </h2>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="featured-books">
+            <!-- Les cartes seront remplies par JS plus tard, mais on met déjà du contenu statique -->
+            <!-- Livre 1 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
+                <img src="https://picsum.photos/id/1015/300/400" alt="Le Petit Prince" 
+                     class="w-full h-80 object-cover group-hover:scale-105 transition">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg">Le Petit Prince</h3>
+                    <p class="text-slate-500 text-sm">Antoine de Saint-Exupéry</p>
+                    <div class="flex justify-between items-end mt-4">
+                        <p class="text-2xl font-bold text-emerald-600">12,99 €</p>
+                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
+                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Livre 2 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
+                <img src="https://picsum.photos/id/201/300/400" alt="1984" 
+                     class="w-full h-80 object-cover group-hover:scale-105 transition">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg">1984</h3>
+                    <p class="text-slate-500 text-sm">George Orwell</p>
+                    <div class="flex justify-between items-end mt-4">
+                        <p class="text-2xl font-bold text-emerald-600">9,99 €</p>
+                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
+                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Livre 3 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
+                <img src="https://picsum.photos/id/870/300/400" alt="Harry Potter" 
+                     class="w-full h-80 object-cover group-hover:scale-105 transition">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg">Harry Potter à l'école des sorciers</h3>
+                    <p class="text-slate-500 text-sm">J.K. Rowling</p>
+                    <div class="flex justify-between items-end mt-4">
+                        <p class="text-2xl font-bold text-emerald-600">15,50 €</p>
+                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
+                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Livre 4 -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
+                <img src="https://picsum.photos/id/1005/300/400" alt="L'Étranger" 
+                     class="w-full h-80 object-cover group-hover:scale-105 transition">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg">L'Étranger</h3>
+                    <p class="text-slate-500 text-sm">Albert Camus</p>
+                    <div class="flex justify-between items-end mt-4">
+                        <p class="text-2xl font-bold text-emerald-600">8,50 €</p>
+                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
+                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATÉGORIES (exemple simple) -->
+    <section class="bg-slate-100 py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-serif mb-8">Explorez par catégorie</h2>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">📖 Littérature française</div>
+                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🧙 Fantasy</div>
+                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🔬 Science-fiction</div>
+                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">📚 Romans policiers</div>
+                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🌍 Voyage & Aventure</div>
+                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🧠 Développement personnel</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (avec lien GitHub pour montrer qu’on utilise les fonctionnalités GitHub) -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center gap-2 text-2xl mb-4">📖 LivreGit</div>
+                <p class="text-slate-400">Projet collaboratif développé avec ❤️ sur GitHub</p>
+                <p class="text-xs text-slate-500 mt-6">Branche HTML : AshtonMarlon-html<br>
+                   Branche CSS : tracy-fodouop-css<br>
+                   Branche JS : JavaScript</p>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="https://github.com/ton-username/ton-repo" target="_blank" class="hover:text-emerald-400">🔗 Voir le dépôt GitHub</a>
+                <a href="#" class="hover:text-emerald-400">Issues & Suggestions</a>
+                <a href="#" class="hover:text-emerald-400">Pull Requests</a>
+            </div>
+            <div class="text-sm text-slate-400">
+                © 2026 LivreGit • Hébergé avec GitHub Pages<br>
+                Utilise les branches, les PR, les issues… tout GitHub !
+            </div>
+        </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Script temporaire pour tester l'interaction -->
+    <script src="script.js"></script> <!-- Sera rempli par ton binôme JS plus tard -->
 </body>
 </html>
