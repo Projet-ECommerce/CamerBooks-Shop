@@ -1,0 +1,68 @@
+/* --- DESIGN COLLABORATIF LIVREGIT --- */
+
+/* 1. Animation "Float" : Donne de la vie à l'image du livre en haut */
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(1.5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+header img {
+    animation: float 6s ease-in-out infinite;
+    filter: drop-shadow(0 25px 40px rgba(0, 0, 0, 0.25));
+}
+
+/* 2. Micro-interactions sur les cartes de livres */
+/* On utilise les classes 'group' déjà présentes dans le HTML de ton coéquipier */
+.group {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover {
+    transform: translateY(-12px); /* La carte s'élève */
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
+}
+
+.group img {
+    transition: transform 0.7s ease;
+}
+
+.group:hover img {
+    transform: scale(1.12); /* L'image à l'intérieur zoome */
+}
+
+/* 3. Personnalisation de la Scrollbar (Barre de défilement) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #065f46; /* Vert Emeraude identique au HTML */
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #047857;
+}
+
+/* 4. Effets de boutons et liens */
+button:active {
+    transform: scale(0.94); /* Effet d'enfoncement au clic */
+    transition: 0.1s;
+}
+
+/* 5. Optimisation des catégories */
+.cursor-pointer {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.cursor-pointer:hover {
+    border-color: #10b981;
+    background-color: #ffffff !important;
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.1);
+}
