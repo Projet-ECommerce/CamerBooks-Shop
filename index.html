@@ -3,209 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="LivreGit - Votre librairie en ligne collaborative sur GitHub">
-    <title>LivreGit - Vente de livres en ligne</title>
+    <meta name="description" content="CamerBooks Shop - Librairie en ligne collaborative sur GitHub">
+    <title>CamerBooks Shop - Vente de livres en ligne</title>
     
-    <!-- Tailwind CSS CDN (temporaire pour une jolie interface immédiate) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // Configuration Tailwind pour un thème librairie élégant
         document.addEventListener('DOMContentLoaded', () => {
             tailwind.config = {
                 content: ["./**/*.{html,js}"],
-                theme: {
-                    extend: {
-                        fontFamily: { serif: ['Georgia', 'serif'] }
-                    }
-                }
+                theme: { extend: { fontFamily: { serif: ['Georgia', 'serif'] } } }
             }
         })
     </script>
     
-    <link rel="stylesheet" href="style.css"> <!-- Sera rempli par Tracy plus tard -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans">
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR - Amélioré pour auto-arrangement (flex wrap + gap) -->
     <nav class="bg-emerald-800 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-            <!-- Logo -->
-            <div class="flex items-center gap-2 text-3xl font-bold">
-                📖 <span class="font-serif">LivreGit</span>
-            </div>
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 text-3xl font-bold flex-shrink-0">
+                    📖 <span class="font-serif">CamerBooks</span>
+                </div>
 
-            <!-- Menu -->
-            <div class="hidden md:flex items-center gap-8 text-lg">
-                <a href="#" class="hover:text-emerald-200 transition">Accueil</a>
-                <a href="#" class="hover:text-emerald-200 transition">Boutique</a>
-                <a href="#" class="hover:text-emerald-200 transition">Catégories</a>
-                <a href="#" class="hover:text-emerald-200 transition">À propos</a>
-                <a href="#" class="hover:text-emerald-200 transition">Contact</a>
-            </div>
+                <!-- Menu principal - s'adapte automatiquement -->
+                <div class="hidden md:flex items-center gap-8 text-lg flex-wrap">
+                    <a href="#" class="hover:text-emerald-200 transition">Accueil</a>
+                    <a href="#boutique" class="hover:text-emerald-200 transition">Boutique</a>
+                    <a href="#" onclick="showAboutModal()" class="hover:text-emerald-200 transition">À propos</a>
+                    <a href="#" onclick="showContactModal()" class="hover:text-emerald-200 transition">Contact</a>
+                </div>
 
-            <!-- Recherche + Panier + Compte -->
-            <div class="flex items-center gap-4">
-                <div class="relative">
-                    <input id="search-input" 
-                           type="text" 
-                           placeholder="Rechercher un livre..." 
-                           class="bg-white text-slate-800 px-4 py-2 rounded-full w-72 focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm">
-                    <button onclick="alert('Recherche bientôt active avec JS !')" 
-                            class="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-600">
-                        🔎
+                <!-- Droite : Recherche + Panier + Compte -->
+                <div class="flex items-center gap-4 flex-wrap">
+                    <div class="relative flex-1 min-w-[240px]">
+                        <input id="search-input" 
+                               type="text" 
+                               placeholder="Rechercher un livre ou un auteur..." 
+                               class="bg-white text-slate-800 px-4 py-2 rounded-full w-full focus:outline-none focus:ring-2 focus:ring-emerald-400 text-sm">
+                    </div>
+                    
+                    <button id="cart-button" 
+                            class="flex items-center gap-2 hover:bg-emerald-700 px-4 py-2 rounded-xl transition flex-shrink-0">
+                        🛒 <span id="cart-count" class="text-xs bg-white text-emerald-800 rounded-full px-2 py-0.5">0</span>
+                    </button>
+                    
+                    <button id="account-button"
+                            class="flex items-center gap-2 bg-white text-emerald-800 hover:bg-emerald-100 px-6 py-2 rounded-xl font-medium transition flex-shrink-0">
+                        👤 Se connecter
                     </button>
                 </div>
-                
-                <button onclick="alert('Panier bientôt géré par le JS !')" 
-                        class="flex items-center gap-2 hover:bg-emerald-700 px-4 py-2 rounded-xl transition">
-                    🛒 <span id="cart-count" class="text-xs bg-white text-emerald-800 rounded-full px-2 py-0.5">0</span>
-                </button>
-                
-                <button onclick="alert('Connexion bientôt avec JS !')" 
-                        class="flex items-center gap-2 bg-white text-emerald-800 hover:bg-emerald-100 px-6 py-2 rounded-xl font-medium transition">
-                    👤 Se connecter
-                </button>
             </div>
         </div>
     </nav>
 
+    <!-- Le reste du HTML (HERO, BOUTIQUE, CATÉGORIES, FOOTER) reste IDENTIQUE à la version précédente -->
     <!-- HERO -->
     <header class="bg-gradient-to-r from-emerald-700 to-teal-600 text-white py-20">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <div>
-                <h1 class="text-6xl font-serif leading-none mb-4">Découvrez l’univers<br>des livres sur GitHub</h1>
-                <p class="text-2xl mb-8 text-emerald-100">Plus de 500 titres • Livraison gratuite dès 30 € • Collaboration open-source</p>
+                <h1 class="text-6xl font-serif leading-none mb-4">Découvrez l’univers<br>des livres camerounais & internationaux</h1>
+                <p class="text-2xl mb-8 text-emerald-100">Plus de 500 titres • Livraison rapide • Projet collaboratif sur GitHub</p>
                 <div class="flex gap-4">
-                    <a href="#" onclick="alert('Boutique bientôt active !')" 
-                       class="bg-white text-emerald-800 px-10 py-4 rounded-2xl font-medium text-xl hover:scale-105 transition">Explorer la boutique</a>
-                    <a href="#" class="border-2 border-white px-10 py-4 rounded-2xl font-medium text-xl hover:bg-white hover:text-emerald-800 transition">Voir les nouveautés</a>
+                    <a href="#boutique" class="bg-white text-emerald-800 px-10 py-4 rounded-2xl font-medium text-xl hover:scale-105 transition">Explorer la boutique</a>
+                    <a href="#featured-books" class="border-2 border-white px-10 py-4 rounded-2xl font-medium text-xl hover:bg-white hover:text-emerald-800 transition">Voir les nouveautés</a>
                 </div>
             </div>
             <div class="hidden md:block text-center">
-                <div class="inline-block bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-white/30">
-                    <img src="https://picsum.photos/id/1015/600/500" alt="Livre hero" 
-                         class="rounded-2xl shadow-2xl max-h-[420px] mx-auto">
-                </div>
+                <img src="https://picsum.photos/id/1015/600/500" alt="Livre hero" class="rounded-2xl shadow-2xl max-h-[420px] mx-auto">
             </div>
         </div>
     </header>
 
-    <!-- LIVRES EN VEDETTE -->
-    <section class="max-w-7xl mx-auto px-6 py-16">
-        <h2 class="text-4xl font-serif mb-8 flex items-center gap-3">
-            🔥 Livres en vedette
-        </h2>
-        
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="featured-books">
-            <!-- Les cartes seront remplies par JS plus tard, mais on met déjà du contenu statique -->
-            <!-- Livre 1 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
-                <img src="https://picsum.photos/id/1015/300/400" alt="Le Petit Prince" 
-                     class="w-full h-80 object-cover group-hover:scale-105 transition">
-                <div class="p-4">
-                    <h3 class="font-medium text-lg">Le Petit Prince</h3>
-                    <p class="text-slate-500 text-sm">Antoine de Saint-Exupéry</p>
-                    <div class="flex justify-between items-end mt-4">
-                        <p class="text-2xl font-bold text-emerald-600">12,99 €</p>
-                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
-                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
-                            Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Livre 2 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
-                <img src="https://picsum.photos/id/201/300/400" alt="1984" 
-                     class="w-full h-80 object-cover group-hover:scale-105 transition">
-                <div class="p-4">
-                    <h3 class="font-medium text-lg">1984</h3>
-                    <p class="text-slate-500 text-sm">George Orwell</p>
-                    <div class="flex justify-between items-end mt-4">
-                        <p class="text-2xl font-bold text-emerald-600">9,99 €</p>
-                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
-                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
-                            Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Livre 3 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
-                <img src="https://picsum.photos/id/870/300/400" alt="Harry Potter" 
-                     class="w-full h-80 object-cover group-hover:scale-105 transition">
-                <div class="p-4">
-                    <h3 class="font-medium text-lg">Harry Potter à l'école des sorciers</h3>
-                    <p class="text-slate-500 text-sm">J.K. Rowling</p>
-                    <div class="flex justify-between items-end mt-4">
-                        <p class="text-2xl font-bold text-emerald-600">15,50 €</p>
-                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
-                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
-                            Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Livre 4 -->
-            <div class="bg-white rounded-3xl overflow-hidden shadow hover:shadow-xl transition group">
-                <img src="https://picsum.photos/id/1005/300/400" alt="L'Étranger" 
-                     class="w-full h-80 object-cover group-hover:scale-105 transition">
-                <div class="p-4">
-                    <h3 class="font-medium text-lg">L'Étranger</h3>
-                    <p class="text-slate-500 text-sm">Albert Camus</p>
-                    <div class="flex justify-between items-end mt-4">
-                        <p class="text-2xl font-bold text-emerald-600">8,50 €</p>
-                        <button onclick="alert('Ajouté au panier ! (JS à venir)')" 
-                                class="bg-emerald-600 text-white px-5 py-2 rounded-2xl text-sm hover:bg-emerald-700 transition">
-                            Ajouter au panier
-                        </button>
-                    </div>
-                </div>
-            </div>
+    <!-- BOUTIQUE (identique) -->
+    <section id="boutique" class="max-w-7xl mx-auto px-6 py-16">
+        <div class="flex flex-wrap items-center justify-between mb-8">
+            <h2 id="featured-books" class="text-4xl font-serif">🔥 Livres en vedette</h2>
+            <div id="category-filters" class="flex flex-wrap gap-2"></div>
         </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8" id="books-container"></div>
     </section>
 
-    <!-- CATÉGORIES (exemple simple) -->
+    <!-- CATÉGORIES statiques (identique) -->
     <section class="bg-slate-100 py-16">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-4xl font-serif mb-8">Explorez par catégorie</h2>
-            <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">📖 Littérature française</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🧙 Fantasy</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🔬 Science-fiction</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">📚 Romans policiers</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🌍 Voyage & Aventure</div>
-                <div class="bg-white p-6 rounded-3xl text-center hover:bg-emerald-50 transition cursor-pointer">🧠 Développement personnel</div>
-            </div>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4" id="static-categories"></div>
         </div>
     </section>
 
-    <!-- FOOTER (avec lien GitHub pour montrer qu’on utilise les fonctionnalités GitHub) -->
+    <!-- FOOTER (identique) -->
     <footer class="bg-slate-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
             <div>
-                <div class="flex items-center gap-2 text-2xl mb-4">📖 LivreGit</div>
-                <p class="text-slate-400">Projet collaboratif développé avec ❤️ sur GitHub</p>
-                <p class="text-xs text-slate-500 mt-6">Branche HTML : AshtonMarlon-html<br>
-                   Branche CSS : tracy-fodouop-css<br>
-                   Branche JS : JavaScript</p>
+                <div class="flex items-center gap-2 text-2xl mb-4">📖 CamerBooks Shop</div>
+                <p class="text-slate-400">Projet collaboratif de 3 personnes développé avec ❤️ sur GitHub</p>
             </div>
             <div class="flex flex-col gap-2">
-                <a href="https://github.com/ton-username/ton-repo" target="_blank" class="hover:text-emerald-400">🔗 Voir le dépôt GitHub</a>
-                <a href="#" class="hover:text-emerald-400">Issues & Suggestions</a>
-                <a href="#" class="hover:text-emerald-400">Pull Requests</a>
+                <a href="https://github.com/Projet-ECommerce/CamerBooks-Shop" target="_blank" class="hover:text-emerald-400">🔗 Voir le dépôt GitHub</a>
+                <a href="https://github.com/Projet-ECommerce/CamerBooks-Shop/issues" target="_blank" class="hover:text-emerald-400">Issues</a>
+                <a href="https://github.com/Projet-ECommerce/CamerBooks-Shop/pulls" target="_blank" class="hover:text-emerald-400">Pull Requests</a>
             </div>
             <div class="text-sm text-slate-400">
-                © 2026 LivreGit • Hébergé avec GitHub Pages<br>
-                Utilise les branches, les PR, les issues… tout GitHub !
+                © 2026 CamerBooks Shop • Branche JavaScript active
             </div>
         </div>
     </footer>
 
-    <!-- Script temporaire pour tester l'interaction -->
-    <script src="script.js"></script> <!-- Sera rempli par ton binôme JS plus tard -->
+    <!-- MODALE À PROPOS -->
+    <div id="about-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-3xl max-w-lg w-full mx-4 p-8">
+            <h2 class="text-3xl font-serif mb-6 text-center">À propos de CamerBooks Shop</h2>
+            <p class="text-slate-600 mb-8 text-center">Un projet collaboratif réalisé par 3 étudiants passionnés de développement web et de littérature.</p>
+            
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">👨‍💻</div>
+                    <div>
+                        <p class="font-semibold">Ashton Marlon Messina</p>
+                        <p class="text-sm text-slate-500">Responsable HTML + JavaScript</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">🎨</div>
+                    <div>
+                        <p class="font-semibold">Fodouop Tracy</p>
+                        <p class="text-sm text-slate-500">Responsable CSS</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">📝</div>
+                    <div>
+                        <p class="font-semibold">Ze Elvira</p>
+                        <p class="text-sm text-slate-500">Co-équipière du projet</p>
+                    </div>
+                </div>
+            </div>
+            
+            <button onclick="closeAboutModal()" 
+                    class="mt-10 w-full py-4 bg-slate-100 hover:bg-slate-200 rounded-2xl font-medium transition">
+                Fermer
+            </button>
+        </div>
+    </div>
+
+    <!-- MODALE CONTACT -->
+    <div id="contact-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-8">
+            <h2 class="text-3xl font-serif mb-6 text-center">Contactez-nous</h2>
+            <p class="text-slate-600 mb-8 text-center">N'hésitez pas à nous écrire pour toute question ou suggestion !</p>
+            
+            <div class="space-y-6">
+                <div>
+                    <p class="font-medium">Ashton Marlon Messina</p>
+                    <a href="mailto:ashtonmrln@gmail.com" class="text-emerald-600 hover:underline">ashtonmrln@gmail.com</a>
+                </div>
+                <div>
+                    <p class="font-medium">Fodouop Tracy</p>
+                    <a href="mailto:tracyfodouop@gmail.com" class="text-emerald-600 hover:underline">tracyfodouop@gmail.com</a>
+                </div>
+            </div>
+            
+            <button onclick="closeContactModal()" 
+                    class="mt-10 w-full py-4 bg-slate-100 hover:bg-slate-200 rounded-2xl font-medium transition">
+                Fermer
+            </button>
+        </div>
+    </div>
+
+    <!-- MODALE GESTION COMPTE (apparaît après connexion) -->
+    <div id="account-modal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+        <div class="bg-white rounded-3xl max-w-sm w-full mx-4 p-8">
+            <h3 class="text-2xl font-medium mb-2 text-center">Bonjour, <span id="user-name-display" class="font-serif"></span> !</h3>
+            <p class="text-slate-500 text-center mb-8">Gérez votre compte</p>
+            
+            <div class="space-y-3">
+                <button onclick="editName()" 
+                        class="w-full py-3 border border-slate-300 rounded-2xl hover:bg-slate-50 transition">Modifier mon nom</button>
+                <button onclick="logout()" 
+                        class="w-full py-3 border border-red-300 text-red-600 rounded-2xl hover:bg-red-50 transition">Se déconnecter</button>
+            </div>
+            
+            <button onclick="closeAccountModal()" 
+                    class="mt-8 w-full py-4 bg-slate-100 hover:bg-slate-200 rounded-2xl font-medium transition">
+                Fermer
+            </button>
+        </div>
+    </div>
+
+    <!-- Mini panier modal (identique à avant) -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full mx-4 p-6">
+            <h3 class="text-2xl font-medium mb-4">Votre panier</h3>
+            <div id="cart-items" class="max-h-96 overflow-auto"></div>
+            <div class="border-t pt-4 mt-4 flex justify-between font-bold text-lg">
+                <span>Total :</span>
+                <span id="cart-total">0 €</span>
+            </div>
+            <div class="flex gap-3 mt-6">
+                <button onclick="closeCart()" class="flex-1 py-3 border border-slate-300 rounded-2xl text-slate-700">Fermer</button>
+                <button onclick="checkout()" class="flex-1 py-3 bg-emerald-600 text-white rounded-2xl">Passer à la caisse</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
